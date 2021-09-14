@@ -4,7 +4,7 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getTargetsConfigFromProject, readJsonInTree, sortObjectByKeys } from '../utils/';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageJSON = require('../../package.json');
+const packageJSON = require('../package.json');
 
 function addAngularJestPackages() {
   return (host: Tree, context: SchematicContext) => {
