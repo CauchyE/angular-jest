@@ -223,7 +223,9 @@ function createProjectJestConfig(
 ) {
   return async (tree: Tree) => {
     const tsconfigPath = join(normalize(projectRoot || '/'), 'tsconfig.spec.json');
-    const projectTSConfigJSON = (tree.read(tsconfigPath) as Buffer).toString('utf-8');
+    const projectTSConfigJSON = stripJsonComments(
+      (tree.read(tsconfigPath) as Buffer).toString('utf-8'),
+    );
     const json: { compilerOptions: { types: string[] } } = JSON.parse(projectTSConfigJSON);
 
     json.compilerOptions.types = json.compilerOptions.types || [];
@@ -271,7 +273,9 @@ export function removeKarmaConfJsForProject(projectName: string): Rule {
     const { root: projectRoot } = angularJSON.projects[projectName];
 
     const tsconfigPath = join(normalize(projectRoot || '/'), 'tsconfig.spec.json');
-    const projectTSConfigJSON = (tree.read(tsconfigPath) as Buffer).toString('utf-8');
+    const projectTSConfigJSON = stripJsonComments(
+      (tree.read(tsconfigPath) as Buffer).toString('utf-8'),
+    );
     const json: { compilerOptions: { types: string[] } } = JSON.parse(projectTSConfigJSON);
 
     json.compilerOptions.types = json.compilerOptions.types || [];
