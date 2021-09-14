@@ -22,7 +22,8 @@
     "target": "es6",
     "types": [
       "node"
-    ]
+    ],
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*"
