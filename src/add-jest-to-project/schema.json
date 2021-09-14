@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "add-jest-to-project",
+    "title": "Add Jest to an Angular CLI project",
+    "type": "object",
+    "properties": {
+        "project": {
+            "description": "The name of the project to add Jest to.",
+            "type": "string",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        }
+    },
+    "required": []
+}

@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "convert-karma-to-jest",
+    "title": "Convert an Angular CLI project from Karma to Jest",
+    "examples": [
+        {
+            "command": "g convert-karma-to-jest myapp",
+            "description": "Convert the Angular CLI project `myapp` from Karma to Jest"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "project": {
+            "description": "The name of the project to convert.",
+            "type": "string",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            }
+        },
+        "convertIndentationRules": {
+            "description": "Whether or not rules relating purely to indentation (code formatting) should be converted. It is strongly encouraged to switch to https://prettier.io instead.",
+            "type": "boolean",
+            "default": false
+        },
+        "removeKarmaIfNoMoreKarmaTargets": {
+            "type": "boolean",
+            "description": "If this conversion leaves no more Karma usage in the workspace, it will remove Karma and related dependencies and configuration",
+            "default": true,
+            "x-prompt": "Would you like to remove Karma and its related config if there are no Karma projects remaining after this conversion?"
+        },
+        "ignoreExistingKarmaConfig": {
+            "type": "boolean",
+            "description": "If true we will not use existing Karma config as a reference, we will just reset the project with the latest recommended Jest config",
+            "default": false,
+            "x-prompt": "Would you like to ignore the existing Karma config? Recommended if the Karma config has not been altered much as it makes the new Jest config cleaner."
+        }
+    }
+}
