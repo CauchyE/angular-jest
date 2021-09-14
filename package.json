@@ -1,15 +1,15 @@
 {
   "name": "@angular-jest/schematics",
   "version": "0.1.0",
-  "description": "",
+  "description": "Auto configuration for using @angular-builders/jest",
   "main": "index.js",
   "scripts": {
     "lint": "eslint \"src/**/*\"",
     "test": "jest",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && node bundle",
     "prepare": "husky install"
   },
-  "author": "",
+  "author": "CauchyE, Inc.",
   "license": "ISC",
   "schematics": "./src/collection.json",
   "dependencies": {
@@ -30,6 +30,7 @@
     "@typescript-eslint/parser": "^4.19.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
+    "fs-extra": "^10.0.0",
     "husky": "^5.1.3",
     "jest": "^27.0.6",
     "jest-preset-angular": "^9.0.7",
