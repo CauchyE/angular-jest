@@ -223,17 +223,10 @@ function createProjectJestConfig(
 ) {
   return async (tree: Tree) => {
     const tsconfigPath = join(normalize(projectRoot || '/'), 'tsconfig.spec.json');
-    const projectTSConfigJSON = stripJsonComments(
-      (tree.read(tsconfigPath) as Buffer).toString('utf-8'),
-    );
-    const json: { compilerOptions: { types: string[] } } = JSON.parse(projectTSConfigJSON);
+    const projectTSConfigJSON = (tree.read(tsconfigPath) as Buffer).toString('utf-8');
+    const replaced = projectTSConfigJSON.replace(`"jasmine"`, `"jest"`);
 
-    json.compilerOptions.types = json.compilerOptions.types || [];
-    if (!json.compilerOptions.types.find((v) => v === 'jest')) {
-      json.compilerOptions.types.push('jest');
-    }
-
-    tree.overwrite(tsconfigPath, JSON.stringify(json, null, 2));
+    tree.overwrite(tsconfigPath, replaced);
 
     const templateSource = apply(url('../files'), [
       applyTemplates({
@@ -271,17 +264,6 @@ export function removeKarmaConfJsForProject(projectName: string): Rule {
   return (tree: Tree) => {
     const angularJSON = readJsonInTree(tree, 'angular.json');
     const { root: projectRoot } = angularJSON.projects[projectName];
-
-    const tsconfigPath = join(normalize(projectRoot || '/'), 'tsconfig.spec.json');
-    const projectTSConfigJSON = stripJsonComments(
-      (tree.read(tsconfigPath) as Buffer).toString('utf-8'),
-    );
-    const json: { compilerOptions: { types: string[] } } = JSON.parse(projectTSConfigJSON);
-
-    json.compilerOptions.types = json.compilerOptions.types || [];
-    json.compilerOptions.types = json.compilerOptions.types.filter((v) => v !== 'jasmine');
-
-    tree.overwrite(tsconfigPath, JSON.stringify(json, null, 2));
 
     const karmaJsonPath = join(normalize(projectRoot || '/'), 'karma.conf.js');
     if (tree.exists(karmaJsonPath)) {

@@ -1,6 +1,6 @@
 {
   "name": "@angular-jest/schematics",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Auto configuration for using @angular-builders/jest",
   "main": "index.js",
   "scripts": {

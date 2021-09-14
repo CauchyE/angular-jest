@@ -8,10 +8,15 @@
       "schema": "./ng-add/schema.json",
       "description": "Add angular-jest to an existing workspace"
     },
-    "convert-karma-to-jest": {
-      "factory": "./convert-karma-to-jest",
-      "schema": "./convert-karma-to-jest/schema.json",
-      "description": "Convert the given project's Karma setup to an equivalent Jest one"
+    "remove-karma": {
+      "factory": "./remove-karma",
+      "schema": "./remove-karma/schema.json",
+      "description": "Remove the given project's Karma setup"
+    },
+    "add-jest": {
+      "factory": "./add-jest",
+      "schema": "./add-jest/schema.json",
+      "description": "Add Jest to an Angular CLI project"
     },
     "application": {
       "aliases": [
@@ -28,11 +33,6 @@
       "factory": "./library",
       "schema": "./library/schema.json",
       "description": "Generate a library project for Angular."
-    },
-    "add-jest-to-project": {
-      "factory": "./add-jest-to-project",
-      "schema": "./add-jest-to-project/schema.json",
-      "description": "Add Jest to an Angular CLI project"
     }
   }
 }

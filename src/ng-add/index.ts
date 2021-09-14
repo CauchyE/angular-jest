@@ -1,7 +1,7 @@
 import type { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { chain, schematic } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { getTargetsConfigFromProject, readJsonInTree, sortObjectByKeys } from '../utils/';
+import { readJsonInTree, sortObjectByKeys } from '../utils/';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJSON = require('../package.json');
@@ -49,44 +49,28 @@ Please see https://github.com/CauchyE/angular-jest for how to add Jest configura
   };
 }
 
-function applyJestConfigIfSingleProjectWithNoExistingKarma() {
-  return (host: Tree, context: SchematicContext) => {
+function applyJestConfigForDefaultProject() {
+  return (host: Tree, _: SchematicContext) => {
     const angularJson = readJsonInTree(host, 'angular.json');
     if (!angularJson || !angularJson.projects) {
       return;
     }
-    // Anything other than a single project, finish here as there is nothing more we can do automatically
     const projectNames = Object.keys(angularJson.projects);
-    if (projectNames.length !== 1) {
+    if (projectNames.length === 0) {
       return;
     }
 
-    const singleProject = angularJson.projects[projectNames[0]];
-    const targetsConfig = getTargetsConfigFromProject(singleProject);
-    // Only possible if malformed, safer to finish here
-    if (!targetsConfig) {
+    const defaultProject = angularJson.defaultProject;
+    if (!defaultProject) {
       return;
     }
 
-    // The project already has a lint builder setup, finish here as there is nothing more we can do automatically
-    if (targetsConfig.lint) {
-      return;
-    }
-
-    context.logger.info(`
-We detected that you have a single project in your workspace and no existing linter wired up, so we are configuring Jest for you automatically.
-Please see https://github.com/CauchyE/angular-jest for more information.
-`);
-
-    return chain([schematic('add-jest-to-project', {})]);
+    return chain([schematic('add-jest', {})]);
   };
 }
 
 export default function (): Rule {
   return (host: Tree, context: SchematicContext) => {
-    return chain([addAngularJestPackages(), applyJestConfigIfSingleProjectWithNoExistingKarma()])(
-      host,
-      context,
-    );
+    return chain([addAngularJestPackages(), applyJestConfigForDefaultProject()])(host, context);
   };
 }

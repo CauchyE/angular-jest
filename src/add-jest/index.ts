@@ -10,7 +10,7 @@ interface Schema {
   project?: string;
 }
 
-export default function addJestToProject(schema: Schema): Rule {
+export default function addJest(schema: Schema): Rule {
   return (tree: Tree) => {
     const projectName = determineTargetProjectName(tree, schema.project);
     if (!projectName) {
@@ -18,7 +18,7 @@ export default function addJestToProject(schema: Schema): Rule {
         '\n' +
           `
 Error: You must specify a project to add Jest to because you have multiple projects in your angular.json
-E.g. npx ng g @angular-jest/schematics:add-jest-to-project {{YOUR_PROJECT_NAME_GOES_HERE}}
+E.g. npx ng g @angular-jest/schematics:add-jest {{YOUR_PROJECT_NAME_GOES_HERE}}
         `.trim(),
       );
     }

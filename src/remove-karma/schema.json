@@ -20,9 +20,9 @@
         },
         "removeKarmaIfNoMoreKarmaTargets": {
             "type": "boolean",
-            "description": "If this conversion leaves no more Karma usage in the workspace, it will remove Karma and related dependencies and configuration",
+            "description": "If this operation leaves no more Karma usage in the workspace, it will remove Karma and related dependencies",
             "default": true,
-            "x-prompt": "Would you like to remove Karma and its related config if there are no Karma projects remaining after this conversion?"
+            "x-prompt": "Would you like to remove Karma and its related dependencies if there are no Karma projects remaining after this operation?"
         }
     }
 }

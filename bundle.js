@@ -9,11 +9,11 @@ for (const source of sources) {
 const sourcesInSrc = [
   'collection.json',
   'files',
-  'add-jest-to-project/schema.json',
+  'add-jest/schema.json',
   'application/schema.json',
-  'convert-karma-to-jest/schema.json',
   'library/schema.json',
   'ng-add/schema.json',
+  'remove-karma/schema.json',
 ];
 
 for (const source of sourcesInSrc) {
