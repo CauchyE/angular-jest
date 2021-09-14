@@ -1,6 +1,6 @@
 {
   "name": "@angular-jest/schematics",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Auto configuration for using @angular-builders/jest",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "author": "CauchyE, Inc.",
   "license": "ISC",
-  "schematics": "./src/collection.json",
+  "schematics": "./collection.json",
   "dependencies": {
     "@angular-devkit/core": "^11.0.5",
     "@angular-devkit/schematics": "^11.0.5",
