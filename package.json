@@ -7,7 +7,7 @@
     "lint": "eslint \"src/**/*\"",
     "test": "jest",
     "build": "tsc -p tsconfig.json && node bundle",
-    "prepare": "husky install"
+    "prepare": "husky install || exit 0"
   },
   "author": "CauchyE, Inc.",
   "license": "ISC",
