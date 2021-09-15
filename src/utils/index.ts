@@ -224,7 +224,9 @@ function createProjectJestConfig(
   return async (tree: Tree) => {
     const tsconfigPath = join(normalize(projectRoot || '/'), 'tsconfig.spec.json');
     const projectTSConfigJSON = (tree.read(tsconfigPath) as Buffer).toString('utf-8');
-    const replaced = projectTSConfigJSON.replace(`"jasmine"`, `"jest"`);
+    const replaced = projectTSConfigJSON
+      .replace(`"jasmine"`, `"jest"`)
+      .replace(`"src/test.ts"`, `"src/setup-jest.ts"`);
 
     tree.overwrite(tsconfigPath, replaced);
 
