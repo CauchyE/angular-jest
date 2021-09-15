@@ -158,11 +158,13 @@ export function updateWorkspaceInTree<T = any, O = T>(
 export function addJestTargetToProject(projectName: string, targetName: 'test'): Rule {
   return updateWorkspaceInTree((workspaceJson) => {
     const existingProjectConfig = workspaceJson.projects[projectName];
+    const { root: projectRoot } = workspaceJson.projects[projectName];
+    const configPath = join(normalize(projectRoot || '/'), 'jest.config.js');
 
     const jestTargetConfig = {
       builder: '@angular-builders/jest:run',
       options: {
-        configPath: './jest.config.js',
+        configPath,
       },
     };
 
