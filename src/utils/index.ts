@@ -226,11 +226,21 @@ function createProjectJestConfig(
   return async (tree: Tree) => {
     const tsconfigPath = join(normalize(projectRoot || '/'), 'tsconfig.spec.json');
     const projectTSConfigJSON = (tree.read(tsconfigPath) as Buffer).toString('utf-8');
-    const replaced = projectTSConfigJSON
+    const tsconfigReplaced = projectTSConfigJSON
       .replace(`"jasmine"`, `"jest"`)
       .replace(`"src/test.ts"`, `"src/setup-jest.ts"`);
 
-    tree.overwrite(tsconfigPath, replaced);
+    tree.overwrite(tsconfigPath, tsconfigReplaced);
+
+    const tsconfigLibPath = join(normalize(projectRoot || '/'), 'tsconfig.lib.json');
+    if (tree.exists(tsconfigLibPath)) {
+      const projectTSConfigLibJSON = (tree.read(tsconfigLibPath) as Buffer).toString('utf-8');
+      const tsconfigLibReplaced = projectTSConfigLibJSON.replace(
+        `"src/test.ts"`,
+        `"src/setup-jest.ts"`,
+      );
+      tree.overwrite(tsconfigLibPath, tsconfigLibReplaced);
+    }
 
     const templateSource = apply(url('../files'), [
       applyTemplates({
