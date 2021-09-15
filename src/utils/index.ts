@@ -269,6 +269,10 @@ export function removeKarmaConfJsForProject(projectName: string): Rule {
     if (tree.exists(karmaJsonPath)) {
       tree.delete(karmaJsonPath);
     }
+    const testTsPath = join(normalize(projectRoot || '/'), 'src/test.ts');
+    if (tree.exists(testTsPath)) {
+      tree.delete(testTsPath);
+    }
   };
 }
 
