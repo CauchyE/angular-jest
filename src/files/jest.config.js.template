@@ -2,6 +2,6 @@ require('jest-preset-angular/ngcc-jest-processor');
 
 module.exports = {
   preset: 'jest-preset-angular',
-  setupFilesAfterEnv: ['<rootDir>/<%= projectRoot ? `${projectRoot}/` : '' %><%= projectName ? `${projectName}/` : '' %>src/setup-jest.ts'],
-  testPathIgnorePatterns: ['<rootDir>/<%= projectRoot ? `${projectRoot}/` : '' %><%= projectName ? `${projectName}/` : '' %>e2e/']
+  setupFilesAfterEnv: ['<rootDir>/<%= projectRoot ? `${projectRoot}/` : '' %>src/setup-jest.ts'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/<%= projectRoot ? `${projectRoot}/` : '' %>e2e/']
 };
