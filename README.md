@@ -27,3 +27,11 @@ If you use multi projects workspace, you can add Jest setup to each project.
 ```bash
 ng g @angular-jest/schematics:add-jest {{YOUR_PROJECT_NAME_GOES_HERE}}
 ```
+
+#### Only one needed action manually
+
+`tsconfig.spec.json`
+
+```json
+"esModuleInterop": true
+```
